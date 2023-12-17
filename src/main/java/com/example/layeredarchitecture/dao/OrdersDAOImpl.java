@@ -1,12 +1,12 @@
 package com.example.layeredarchitecture.dao;
 
 import com.example.layeredarchitecture.db.DBConnection;
-import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.model.OrderDTO;
 
 import java.sql.*;
 
-public class OrdersDAOImpl {
+public class OrdersDAOImpl implements OrdersDAO {
+    @Override
     public String generateNextOrderId() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
 
@@ -18,6 +18,7 @@ public class OrdersDAOImpl {
         return null;
     }
 
+    @Override
     public boolean isExists(String orderId) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
 
@@ -27,6 +28,7 @@ public class OrdersDAOImpl {
         return stm.executeQuery() != null;
     }
 
+    @Override
     public boolean saveOrder(OrderDTO dto) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
 

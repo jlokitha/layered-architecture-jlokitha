@@ -51,8 +51,8 @@ public class PlaceOrderFormController {
     private String orderId;
     CustomerDAO customerDAO = new CustomerDAOImpl();
     ItemDAO itemDAO = new ItemDAOImpl();
-    OrdersDAOImpl ordersDAO = new OrdersDAOImpl();
-    OrderDetailDAOImpl orderDetailDAO = new OrderDetailDAOImpl();
+    OrdersDAO ordersDAO = new OrdersDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -362,14 +362,11 @@ public class PlaceOrderFormController {
             connection.setAutoCommit(true);
             return true;
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException throwable) {
+            throwable.printStackTrace();
         }
         return false;
     }
-
 
     public ItemDTO findItem(String code) {
         try {
@@ -381,6 +378,4 @@ public class PlaceOrderFormController {
         }
         return null;
     }
-
-
 }
