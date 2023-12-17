@@ -13,12 +13,10 @@ public class OrderTM  {
     public OrderTM() {
     }
 
-    public OrderTM(String orderId, LocalDate orderDate, String customerId, String customerName, BigDecimal orderTotal) {
+    public OrderTM(String orderId, LocalDate orderDate, String customerId) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.customerId = customerId;
-        this.customerName = customerName;
-        this.orderTotal = orderTotal;
     }
 
     public String getOrderId() {
