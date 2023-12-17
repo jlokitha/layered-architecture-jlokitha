@@ -80,8 +80,8 @@ public class ManageItemsFormController {
                         new ItemTM(
                                 dto.getCode(),
                                 dto.getDescription(),
-                                dto.getUnitPrice(),
-                                dto.getQtyOnHand()
+                                dto.getQtyOnHand(),
+                                dto.getUnitPrice()
                         )
                 );
             }
@@ -186,10 +186,10 @@ public class ManageItemsFormController {
                 }
                 //Save Item
 
-                boolean isSaved = itemDAO.saveItem( new ItemDTO( code, description, unitPrice, qtyOnHand ) );
+                boolean isSaved = itemDAO.saveItem( new ItemDTO( code, description, qtyOnHand, unitPrice) );
 
                 if (isSaved) {
-                    tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
+                    tblItems.getItems().add(new ItemTM(code, description, qtyOnHand, unitPrice));
                 }
 
             } catch (SQLException e) {
@@ -205,7 +205,7 @@ public class ManageItemsFormController {
                 }
                 /*Update Item*/
 
-                boolean isUpdated = itemDAO.updateItem( new ItemDTO( code, description, unitPrice, qtyOnHand ) );
+                boolean isUpdated = itemDAO.updateItem( new ItemDTO( code, description, qtyOnHand, unitPrice) );
 
                 if (isUpdated) {
                     ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();

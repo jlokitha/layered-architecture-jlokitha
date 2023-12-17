@@ -12,7 +12,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
     public boolean saveOrderDetail(String orderId, OrderDetailDTO detailDTO) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
 
-        String sql = "INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO orderdetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)";
 
         PreparedStatement stm = connection.prepareStatement(sql);
         stm.setString(1, orderId);

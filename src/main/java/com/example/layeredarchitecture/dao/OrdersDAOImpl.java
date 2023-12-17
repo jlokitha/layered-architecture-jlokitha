@@ -11,7 +11,7 @@ public class OrdersDAOImpl implements OrdersDAO {
         Connection connection = DBConnection.getDbConnection().getConnection();
 
         Statement stm = connection.createStatement();
-        ResultSet rst = stm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
+        ResultSet rst = stm.executeQuery("SELECT oid FROM `orders` ORDER BY oid DESC LIMIT 1;");
 
         if (rst.next()) return rst.getString(1);
 
@@ -22,7 +22,7 @@ public class OrdersDAOImpl implements OrdersDAO {
     public boolean isExists(String orderId) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
 
-        PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
+        PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `orders` WHERE oid=?");
         stm.setString(1, orderId);
 
         return stm.executeQuery() != null;
@@ -32,7 +32,7 @@ public class OrdersDAOImpl implements OrdersDAO {
     public boolean saveOrder(OrderDTO dto) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
 
-        PreparedStatement stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
+        PreparedStatement stm = connection.prepareStatement("INSERT INTO `orders` (oid, date, customerID) VALUES (?,?,?)");
         stm.setString(1, dto.getOrderId());
         stm.setDate(2, Date.valueOf(dto.getOrderDate()));
         stm.setString(3, dto.getCustomerId());

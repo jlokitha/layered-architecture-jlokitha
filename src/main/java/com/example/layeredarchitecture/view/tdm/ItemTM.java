@@ -7,17 +7,17 @@ import java.math.BigDecimal;
 public class ItemTM  {
     private String code;
     private String description;
-    private BigDecimal unitPrice;
     private int qtyOnHand;
+    private BigDecimal unitPrice;
 
     public ItemTM() {
     }
 
-    public ItemTM(String code, String description, BigDecimal unitPrice, int qtyOnHand) {
+    public ItemTM(String code, String description, int qtyOnHand, BigDecimal unitPrice) {
         this.code = code;
         this.description = description;
-        this.unitPrice = unitPrice;
         this.qtyOnHand = qtyOnHand;
+        this.unitPrice = unitPrice;
     }
 
     public String getCode() {
