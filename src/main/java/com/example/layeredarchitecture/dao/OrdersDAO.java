@@ -5,9 +5,9 @@ import com.example.layeredarchitecture.model.OrderDTO;
 import java.sql.*;
 
 public interface OrdersDAO {
-    String generateNextOrderId() throws SQLException, ClassNotFoundException;
+    String generateNewId() throws SQLException, ClassNotFoundException;
 
     boolean isExists(String orderId) throws SQLException, ClassNotFoundException;
 
-    boolean saveOrder(OrderDTO dto) throws SQLException, ClassNotFoundException;
+    boolean save(OrderDTO dto) throws SQLException, ClassNotFoundException;
 }

@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class OrdersDAOImpl implements OrdersDAO {
     @Override
-    public String generateNextOrderId() throws SQLException, ClassNotFoundException {
+    public String generateNewId() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT oid FROM `orders` ORDER BY oid DESC LIMIT 1;");
 
         if (rst.next()) return rst.getString(1);
@@ -23,7 +23,7 @@ public class OrdersDAOImpl implements OrdersDAO {
     }
 
     @Override
-    public boolean saveOrder(OrderDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean save(OrderDTO dto) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("INSERT INTO `orders` (oid, date, customerID) VALUES (?,?,?)",
                 dto.getOrderId(),
                 dto.getOrderDate(),

@@ -73,7 +73,7 @@ public class ManageItemsFormController {
         try {
             /*Get all items*/
 
-            ArrayList<ItemDTO> allItem = itemDAO.getAllItem();
+            ArrayList<ItemDTO> allItem = itemDAO.getAll();
 
             for (ItemDTO dto : allItem) {
                 tblItems.getItems().add(
@@ -142,7 +142,7 @@ public class ManageItemsFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
             }
 
-            boolean isDeleted = itemDAO.deleteItem( code );
+            boolean isDeleted = itemDAO.delete( code );
 
             if (isDeleted) {
                 tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -186,7 +186,7 @@ public class ManageItemsFormController {
                 }
                 //Save Item
 
-                boolean isSaved = itemDAO.saveItem( new ItemDTO( code, description, qtyOnHand, unitPrice) );
+                boolean isSaved = itemDAO.save( new ItemDTO( code, description, qtyOnHand, unitPrice) );
 
                 if (isSaved) {
                     tblItems.getItems().add(new ItemTM(code, description, qtyOnHand, unitPrice));
@@ -205,7 +205,7 @@ public class ManageItemsFormController {
                 }
                 /*Update Item*/
 
-                boolean isUpdated = itemDAO.updateItem( new ItemDTO( code, description, qtyOnHand, unitPrice) );
+                boolean isUpdated = itemDAO.update( new ItemDTO( code, description, qtyOnHand, unitPrice) );
 
                 if (isUpdated) {
                     ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
