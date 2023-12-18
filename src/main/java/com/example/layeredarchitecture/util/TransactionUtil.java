@@ -1,11 +1,37 @@
 package com.example.layeredarchitecture.util;
 
+import com.example.layeredarchitecture.db.DBConnection;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 
-public interface TransactionUtil {
-    void startTransaction() throws SQLException;
+public class TransactionUtil {
+    static Connection connection;
 
-    void endTransaction() throws SQLException;
+    static {
+        try {
+            connection = DBConnection.getDbConnection().getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException( e );
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException( e );
+        }
+    }
 
-    void rollBack() throws SQLException;
+    public TransactionUtil() throws SQLException, ClassNotFoundException {
+    }
+
+    public static void startTransaction() throws SQLException {
+        connection.setAutoCommit(false);
+    }
+
+    public static void endTransaction() throws SQLException {
+        connection.commit();
+        connection.setAutoCommit(true);
+    }
+
+    public static void rollBack() throws SQLException {
+        connection.rollback();
+        connection.setAutoCommit(true);
+    }
 }

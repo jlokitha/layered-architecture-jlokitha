@@ -6,7 +6,6 @@ import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.model.OrderDTO;
 import com.example.layeredarchitecture.model.OrderDetailDTO;
 import com.example.layeredarchitecture.util.TransactionUtil;
-import com.example.layeredarchitecture.util.TransactionUtilImpl;
 import com.example.layeredarchitecture.view.tdm.OrderDetailTM;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -322,8 +321,7 @@ public class PlaceOrderFormController {
         /*Transaction*/
 
         try {
-            TransactionUtil transactionUtil = new TransactionUtilImpl();
-            transactionUtil.startTransaction();
+            TransactionUtil.startTransaction();
 
             boolean isExists = ordersDAO.isExists(orderId);
             /*if order id already exist*/
@@ -334,14 +332,14 @@ public class PlaceOrderFormController {
             boolean isSaved = ordersDAO.saveOrder(new OrderDTO(orderId, orderDate, customerId));
 
             if (!isSaved) {
-                transactionUtil.rollBack();
+                TransactionUtil.rollBack();
                 return false;
             }
 
             for (OrderDetailDTO detail : orderDetails) {
 
                 if (!orderDetailDAO.saveOrderDetail(orderId, detail)) {
-                    transactionUtil.rollBack();
+                    TransactionUtil.rollBack();
                     return false;
                 }
 
@@ -350,12 +348,12 @@ public class PlaceOrderFormController {
                 item.setQtyOnHand(item.getQtyOnHand() - detail.getQty());
 
                 if (!itemDAO.updateItem(item)) {
-                    transactionUtil.rollBack();
+                    TransactionUtil.rollBack();
                     return false;
                 }
             }
 
-            transactionUtil.endTransaction();
+            TransactionUtil.endTransaction();
             return true;
 
         } catch (SQLException | ClassNotFoundException throwable) {

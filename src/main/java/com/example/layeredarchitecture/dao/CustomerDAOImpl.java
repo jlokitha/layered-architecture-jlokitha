@@ -1,7 +1,7 @@
 package com.example.layeredarchitecture.dao;
 
 import com.example.layeredarchitecture.model.CustomerDTO;
-import com.example.layeredarchitecture.util.SqlUtil;
+import com.example.layeredarchitecture.util.SQLUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
 
-        ResultSet rst = SqlUtil.execute("SELECT * FROM customer");
+        ResultSet rst = SQLUtil.execute("SELECT * FROM customer");
 
         ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 
-        return SqlUtil.execute("INSERT INTO customer VALUES (?,?,?)",
+        return SQLUtil.execute("INSERT INTO customer VALUES (?,?,?)",
                 dto.getId(),
                 dto.getName(),
                 dto.getAddress());
@@ -39,7 +39,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 
-        return SqlUtil.execute("UPDATE customer SET name=?, address=? WHERE id=?",
+        return SQLUtil.execute("UPDATE customer SET name=?, address=? WHERE id=?",
                 dto.getName(),
                 dto.getAddress(),
                 dto.getId());
@@ -47,19 +47,19 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean isExists(String id) throws SQLException, ClassNotFoundException {
-        ResultSet rst = SqlUtil.execute("SELECT id FROM customer WHERE id=?", id);
+        ResultSet rst = SQLUtil.execute("SELECT id FROM customer WHERE id=?", id);
 
         return rst.next();
     }
 
     @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
-        return SqlUtil.execute("DELETE FROM customer WHERE id=?", id);
+        return SQLUtil.execute("DELETE FROM customer WHERE id=?", id);
     }
 
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
-        ResultSet rst = SqlUtil.execute("SELECT id FROM customer ORDER BY id DESC LIMIT 1;");
+        ResultSet rst = SQLUtil.execute("SELECT id FROM customer ORDER BY id DESC LIMIT 1;");
 
         if (rst.next()) {
             return rst.getString( 1 );
@@ -70,7 +70,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
-        ResultSet rst = SqlUtil.execute("SELECT * FROM customer WHERE id=?", (id + ""));
+        ResultSet rst = SQLUtil.execute("SELECT * FROM customer WHERE id=?", (id + ""));
 
         if (rst.next()) {
             return new CustomerDTO(
