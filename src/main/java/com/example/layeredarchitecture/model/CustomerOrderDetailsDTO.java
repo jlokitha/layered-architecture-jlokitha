@@ -1,21 +1,23 @@
 package com.example.layeredarchitecture.model;
 
 public class CustomerOrderDetailsDTO {
+    private String orderId;
+    private String total;
+    private String date;
     private String id;
     private String name;
     private String address;
-    private String orderId;
-    private String date;
 
     public CustomerOrderDetailsDTO() {
     }
 
-    public CustomerOrderDetailsDTO(String id, String name, String address, String orderId, String date) {
+    public CustomerOrderDetailsDTO(String orderId, String total, String date, String id, String name, String address) {
+        this.orderId = orderId;
+        this.total = total;
+        this.date = date;
         this.id = id;
         this.name = name;
         this.address = address;
-        this.orderId = orderId;
-        this.date = date;
     }
 
     public String getId() {
@@ -56,6 +58,14 @@ public class CustomerOrderDetailsDTO {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
 
     @Override
