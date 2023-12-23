@@ -71,7 +71,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.layeredarchitecture/com.example.layeredarchitecture.HelloApplication
+                                com.example.layeredarchitecture/lk.jl.layeredarchitecture.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
