@@ -2,10 +2,7 @@ package com.example.layeredarchitecture.controller;
 
 import com.example.layeredarchitecture.bo.BOFactory;
 import com.example.layeredarchitecture.bo.custom.MainBO;
-import com.example.layeredarchitecture.bo.custom.impl.MainBOImpl;
-import com.example.layeredarchitecture.dao.custom.QueryDAO;
-import com.example.layeredarchitecture.dao.custom.impl.QueryDAOImpl;
-import com.example.layeredarchitecture.model.CustomerOrderDetailsDTO;
+import com.example.layeredarchitecture.dto.CustomerOrderDetailsDTO;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;

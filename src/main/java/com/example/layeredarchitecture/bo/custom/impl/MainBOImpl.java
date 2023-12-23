@@ -3,9 +3,7 @@ package com.example.layeredarchitecture.bo.custom.impl;
 import com.example.layeredarchitecture.bo.custom.MainBO;
 import com.example.layeredarchitecture.dao.DAOFactory;
 import com.example.layeredarchitecture.dao.custom.QueryDAO;
-import com.example.layeredarchitecture.dao.custom.impl.QueryDAOImpl;
-import com.example.layeredarchitecture.model.CustomerOrderDetailsDTO;
-import javafx.fxml.FXML;
+import com.example.layeredarchitecture.dto.CustomerOrderDetailsDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

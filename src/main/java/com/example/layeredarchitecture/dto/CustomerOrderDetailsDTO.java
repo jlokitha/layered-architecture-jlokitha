@@ -1,4 +1,4 @@
-package com.example.layeredarchitecture.model;
+package com.example.layeredarchitecture.dto;
 
 public class CustomerOrderDetailsDTO {
     private String orderId;
