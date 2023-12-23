@@ -2,6 +2,7 @@ package com.example.layeredarchitecture.dao.custom.impl;
 
 import com.example.layeredarchitecture.dao.custom.OrderDetailDAO;
 import com.example.layeredarchitecture.dto.OrderDetailDTO;
+import com.example.layeredarchitecture.entity.OrderDetails;
 import com.example.layeredarchitecture.util.SQLUtil;
 
 import java.sql.SQLException;
@@ -9,26 +10,26 @@ import java.util.ArrayList;
 
 public class OrderDetailDAOImpl implements OrderDetailDAO {
     @Override
-    public boolean saveOrderDetail(String orderId, OrderDetailDTO detailDTO) throws SQLException, ClassNotFoundException {
+    public boolean saveOrderDetail(OrderDetails entity) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)",
-                orderId,
-                detailDTO.getItemCode(),
-                detailDTO.getUnitPrice(),
-                detailDTO.getQty());
+                entity.getOid(),
+                entity.getItemCode(),
+                entity.getUnitPrice(),
+                entity.getQty());
     }
 
     @Override
-    public ArrayList<OrderDetailDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<OrderDetails> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean save(OrderDetails entity) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean update(OrderDetails entity) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -48,7 +49,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
     }
 
     @Override
-    public OrderDetailDTO search(String id) throws SQLException, ClassNotFoundException {
+    public OrderDetails search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 }

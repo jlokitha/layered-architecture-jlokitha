@@ -10,6 +10,10 @@ import com.example.layeredarchitecture.dto.CustomerDTO;
 import com.example.layeredarchitecture.dto.ItemDTO;
 import com.example.layeredarchitecture.dto.OrderDTO;
 import com.example.layeredarchitecture.dto.OrderDetailDTO;
+import com.example.layeredarchitecture.entity.Customer;
+import com.example.layeredarchitecture.entity.Item;
+import com.example.layeredarchitecture.entity.OrderDetails;
+import com.example.layeredarchitecture.entity.Orders;
 import com.example.layeredarchitecture.util.TransactionUtil;
 
 import java.sql.SQLException;
@@ -34,7 +38,7 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
 
             }
 
-            boolean isSaved = ordersDAO.save(new OrderDTO(orderId, orderDate, customerId));
+            boolean isSaved = ordersDAO.save(new Orders(orderId, orderDate, customerId));
 
             if (!isSaved) {
                 TransactionUtil.rollBack();
@@ -43,7 +47,7 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
 
             for (OrderDetailDTO detail : orderDetails) {
 
-                if (!orderDetailDAO.saveOrderDetail(orderId, detail)) {
+                if (!orderDetailDAO.saveOrderDetail(new OrderDetails(orderId,detail.getItemCode(),detail.getQty(),detail.getUnitPrice()) )) {
                     TransactionUtil.rollBack();
                     return false;
                 }
@@ -52,7 +56,7 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
                 ItemDTO item = findItem(detail.getItemCode());
                 item.setQtyOnHand(item.getQtyOnHand() - detail.getQty());
 
-                if (!itemDAO.update(item)) {
+                if (!itemDAO.update(new Item(item.getCode(),item.getDescription(),item.getQtyOnHand(),item.getUnitPrice()) )) {
                     TransactionUtil.rollBack();
                     return false;
                 }
@@ -64,12 +68,25 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
 
     @Override
     public ItemDTO searchItem(String newItemCode) throws SQLException, ClassNotFoundException {
-        return itemDAO.search( newItemCode );
+        Item search = itemDAO.search( newItemCode );
+
+        return new ItemDTO(
+                search.getCode(),
+                search.getDescription(),
+                search.getQtyOnHand(),
+                search.getUnitPrice()
+        );
     }
 
     @Override
     public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
-        return customerDAO.search( id );
+        Customer entity = customerDAO.search( id );
+
+        return new CustomerDTO(
+               entity.getId(),
+               entity.getName(),
+               entity.getAddress()
+        );
     }
 
     @Override
@@ -89,15 +106,40 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
 
     @Override
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
-        return customerDAO.getAll();
+        ArrayList<CustomerDTO> customers = new ArrayList<>();
+
+        for (Customer customer : customerDAO.getAll()) {
+            customers.add( new CustomerDTO(
+                    customer.getId(),
+                    customer.getName(),
+                    customer.getAddress()
+            ) );
+        }
+        return customers;
     }
 
     @Override
     public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
-        return itemDAO.getAll();
+        ArrayList<ItemDTO> items = new ArrayList<>();
+
+        for (Item item : itemDAO.getAll()) {
+            items.add( new ItemDTO(
+                    item.getCode(),
+                    item.getDescription(),
+                    item.getQtyOnHand(),
+                    item.getUnitPrice()
+            ) );
+        }
+        return items;
     }
 
     public ItemDTO findItem(String code) throws SQLException, ClassNotFoundException {
-            return itemDAO.search(code);
+        Item search = itemDAO.search( code );
+        return new ItemDTO(
+                search.getCode(),
+                search.getDescription(),
+                search.getQtyOnHand(),
+                search.getUnitPrice()
+        );
     }
 }
