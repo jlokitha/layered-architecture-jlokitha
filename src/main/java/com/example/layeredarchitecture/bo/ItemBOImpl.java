@@ -10,27 +10,27 @@ import java.util.ArrayList;
 public class ItemBOImpl implements ItemBO {
     ItemDAO itemDAO = new ItemDAOImpl();
     @Override
-    public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
         return itemDAO.getAll();
     }
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean deleteItem(String id) throws SQLException, ClassNotFoundException {
         return itemDAO.delete( id );
     }
     @Override
-    public boolean save(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return itemDAO.save( dto );
     }
     @Override
-    public boolean update(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return itemDAO.update( dto );
     }
     @Override
-    public String generateNewId() throws SQLException, ClassNotFoundException {
+    public String generateNewItemId() throws SQLException, ClassNotFoundException {
         return itemDAO.generateNewId();
     }
     @Override
-    public boolean isExists(String id) throws SQLException, ClassNotFoundException {
+    public boolean isExistsItem(String id) throws SQLException, ClassNotFoundException {
         return itemDAO.isExists( id );
     }
 }

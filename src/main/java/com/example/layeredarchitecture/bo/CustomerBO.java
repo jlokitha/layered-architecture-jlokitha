@@ -6,15 +6,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CustomerBO {
-    ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException;
+    ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException;
 
-    boolean save(CustomerDTO dto) throws SQLException, ClassNotFoundException;
+    boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException;
 
-    boolean update(CustomerDTO dto) throws SQLException, ClassNotFoundException;
+    boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException;
 
-    boolean isExists(String id) throws SQLException, ClassNotFoundException;
+    boolean isExistsCustomer(String id) throws SQLException, ClassNotFoundException;
 
-    boolean delete(String id) throws SQLException, ClassNotFoundException;
+    boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException;
 
-    String generateNewId() throws SQLException, ClassNotFoundException;
+    String generateNewCustomerId() throws SQLException, ClassNotFoundException;
 }

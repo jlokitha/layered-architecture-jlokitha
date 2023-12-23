@@ -71,7 +71,7 @@ public class ManageCustomersFormController {
         /*Get all customers*/
         try {
 
-            ArrayList<CustomerDTO> allCustomers = customerBO.getAll();
+            ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomer();
 
             for (CustomerDTO dto : allCustomers) {
                 tblCustomers.getItems().add(
@@ -147,7 +147,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
 
-                boolean isSaved = customerBO.save( new CustomerDTO( id, name, address ) );
+                boolean isSaved = customerBO.saveCustomer( new CustomerDTO( id, name, address ) );
 
                 if (isSaved) {
                     tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -167,7 +167,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
 
-                boolean isUpdated = customerBO.update( new CustomerDTO( id, name, address ) );
+                boolean isUpdated = customerBO.updateCustomer( new CustomerDTO( id, name, address ) );
 
                 if (isUpdated) {
                     CustomerTM selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
@@ -188,7 +188,7 @@ public class ManageCustomersFormController {
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        return customerBO.isExists( id );
+        return customerBO.isExistsCustomer( id );
     }
 
 
@@ -201,7 +201,7 @@ public class ManageCustomersFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
 
-            boolean isDeleted = customerBO.delete( id );
+            boolean isDeleted = customerBO.deleteCustomer( id );
 
             if(isDeleted) {
                 tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -219,7 +219,7 @@ public class ManageCustomersFormController {
     private String generateNewId() {
         try {
 
-            String lastId = customerBO.generateNewId();
+            String lastId = customerBO.generateNewCustomerId();
 
             if (lastId != null) {
                 String id = lastId;

@@ -72,7 +72,7 @@ public class ManageItemsFormController {
         try {
             /*Get all items*/
 
-            ArrayList<ItemDTO> allItem = itemBO.getAll();
+            ArrayList<ItemDTO> allItem = itemBO.getAllItems();
 
             for (ItemDTO dto : allItem) {
                 tblItems.getItems().add(
@@ -141,7 +141,7 @@ public class ManageItemsFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
             }
 
-            boolean isDeleted = itemBO.delete( code );
+            boolean isDeleted = itemBO.deleteItem( code );
 
             if (isDeleted) {
                 tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -185,7 +185,7 @@ public class ManageItemsFormController {
                 }
                 //Save Item
 
-                boolean isSaved = itemBO.save( new ItemDTO( code, description, qtyOnHand, unitPrice) );
+                boolean isSaved = itemBO.saveItem( new ItemDTO( code, description, qtyOnHand, unitPrice) );
 
                 if (isSaved) {
                     tblItems.getItems().add(new ItemTM(code, description, qtyOnHand, unitPrice));
@@ -204,7 +204,7 @@ public class ManageItemsFormController {
                 }
                 /*Update Item*/
 
-                boolean isUpdated = itemBO.update( new ItemDTO( code, description, qtyOnHand, unitPrice) );
+                boolean isUpdated = itemBO.updateItem( new ItemDTO( code, description, qtyOnHand, unitPrice) );
 
                 if (isUpdated) {
                     ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
@@ -226,14 +226,14 @@ public class ManageItemsFormController {
 
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        return itemBO.isExists( code );
+        return itemBO.isExistsItem( code );
     }
 
 
     private String generateNewId() {
         try {
 
-            String lastId = itemBO.generateNewId();
+            String lastId = itemBO.generateNewItemId();
 
             if (lastId != null) {
                 int newItemId = Integer.parseInt(lastId.replace("I00-", "")) + 1;
