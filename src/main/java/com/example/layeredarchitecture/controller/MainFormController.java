@@ -1,7 +1,10 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.bo.BOFactory;
+import com.example.layeredarchitecture.bo.custom.MainBO;
+import com.example.layeredarchitecture.bo.custom.impl.MainBOImpl;
 import com.example.layeredarchitecture.dao.custom.QueryDAO;
-import com.example.layeredarchitecture.dao.custom.impl.QueryDTOImpl;
+import com.example.layeredarchitecture.dao.custom.impl.QueryDAOImpl;
 import com.example.layeredarchitecture.model.CustomerOrderDetailsDTO;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -41,7 +44,7 @@ public class MainFormController {
     private Label lblMenu;
     @FXML
     private Label lblDescription;
-    QueryDAO queryDAO = new QueryDTOImpl();
+    MainBO mainBO = (MainBO) BOFactory.getBoFactory().getBO( BOFactory.BOType.MAIN );
 
 
     /**
@@ -148,7 +151,7 @@ public class MainFormController {
 
     public void printOrderDetails() {
         try {
-            ArrayList<CustomerOrderDetailsDTO> list = queryDAO.customerOrderDetails();
+            ArrayList<CustomerOrderDetailsDTO> list = mainBO.customerOrderDetails();
 
             for (CustomerOrderDetailsDTO dto : list) {
                 System.out.println("Order Id: "+dto.getOrderId()+

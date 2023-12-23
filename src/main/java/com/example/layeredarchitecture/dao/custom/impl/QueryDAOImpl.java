@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class QueryDTOImpl implements QueryDAO {
+public class QueryDAOImpl implements QueryDAO {
     @Override
     public ArrayList<CustomerOrderDetailsDTO> customerOrderDetails() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT o.oid, SUM(od.unitPrice * od.qty), o.date, c.id , c.name, c.address " +

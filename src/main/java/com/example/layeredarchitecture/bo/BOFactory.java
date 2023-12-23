@@ -2,6 +2,7 @@ package com.example.layeredarchitecture.bo;
 
 import com.example.layeredarchitecture.bo.custom.impl.CustomerBOImpl;
 import com.example.layeredarchitecture.bo.custom.impl.ItemBOImpl;
+import com.example.layeredarchitecture.bo.custom.impl.MainBOImpl;
 import com.example.layeredarchitecture.bo.custom.impl.PlaceOrderBOImpl;
 
 public class BOFactory {
@@ -16,7 +17,7 @@ public class BOFactory {
     }
 
     public enum BOType {
-        CUSTOMER,ITEM,PLACE_ORDER
+        CUSTOMER,ITEM,PLACE_ORDER,MAIN
     }
 
     public SuperBO getBO(BOType boType) {
@@ -27,6 +28,8 @@ public class BOFactory {
                 return new ItemBOImpl();
             case PLACE_ORDER:
                 return new PlaceOrderBOImpl();
+            case MAIN:
+                return new MainBOImpl();
             default:
                 return null;
         }
